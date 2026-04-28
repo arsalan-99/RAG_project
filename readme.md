@@ -59,9 +59,9 @@ Make sure these are installed and running before starting:
 5. Open your browser at [http://localhost:8000](http://localhost:8000)
 
 ## Project Structure
-rag_app/\n
-├── backend/
-│   ├── config.py       # Loads config from .env
+rag_app/  
+├── backend/  
+│   ├── config.py       # Loads config from .env  
 │   ├── ingest.py       # Chunking, embedding, storing in Qdrant
 │   ├── rag.py          # Query + LLM call
 │   └── server.py       # FastAPI routes
