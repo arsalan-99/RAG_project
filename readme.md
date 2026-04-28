@@ -62,18 +62,18 @@ Make sure these are installed and running before starting:
 rag_app/  
 ├── backend/  
 │   ├── config.py       # Loads config from .env  
-│   ├── ingest.py       # Chunking, embedding, storing in Qdrant
-│   ├── rag.py          # Query + LLM call
-│   └── server.py       # FastAPI routes
-├── frontend/
-│   ├── index.html      # Q&A page
-│   ├── files.html      # Upload & manage files
-│   ├── admin.html      # Vector DB dashboard
-│   ├── script.js
-│   ├── files.js
-│   ├── admin.js
-│   └── style.css
-├── data/               # Default demo files (auto-ingested on startup)
-├── .env.example        # Copy this to .env and fill in your key
-├── requirements.txt
-└── README.md
+│   ├── ingest.py       # Chunking, embedding, storing in Qdrant  
+│   ├── rag.py          # Query + LLM call  
+│   └── server.py       # FastAPI routes  
+├── frontend/  
+│   ├── index.html      # Q&A page  
+│   ├── files.html      # Upload & manage files  
+│   ├── admin.html      # Vector DB dashboard  
+│   ├── script.js  
+│   ├── files.js  
+│   ├── admin.js  
+│   └── style.css  
+├── data/               # Default demo files (auto-ingested on startup)  
+├── .env.example        # Copy this to .env and fill in your key  
+├── requirements.txt  
+└── README.md  
