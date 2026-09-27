@@ -1,79 +1,76 @@
-# RAG Demo
+# RAG Web App
 
-A Retrieval-Augmented Generation (RAG) web app. Upload documents (PDF or TXT), and ask questions about them. The system retrieves relevant chunks from a vector database and uses an LLM to answer.
+A Retrieval Augmented Generation (RAG) service that allows users to upload documents, indexes them into a vector database. User can ask questions about uploaded them, system retrieves relevant chunks from the vector database and uses an LLM to answer.
 
-## Stack
+## Screenshot
 
-- **Backend:** FastAPI (Python)
-- **Vector DB:** Qdrant (local)
-- **Document DB:** MongoDB (local)
-- **Embeddings:** Ollama (`nomic-embed-text:v1.5`, runs locally)
-- **LLM:** OpenRouter API
-- **Frontend:** Plain HTML/CSS/JS (served by FastAPI)
+<!-- Add screenshot here -->
 
-## Prerequisites
+## Tech Stack
 
-Make sure these are installed and running before starting:
+- Python
+- FastAPI
+- Uvicorn
+- LangChain
+- Qdrant
+- MongoDB
+- Ollama
+- OpenRouter API
+- HTML, CSS, JavaScript
 
-1. [Ollama](https://ollama.com/) — running locally with the embedding model pulled:
-```bash
-   ollama pull nomic-embed-text:v1.5
-```
+## How It Works
 
-2. [Qdrant](https://qdrant.tech/documentation/quick-start/) — running on `localhost:6333`:
-```bash
-   docker run -p 6333:6333 qdrant/qdrant
-```
+- **Document ingestion**: Uploaded PDF and text files are processed via LangChain loaders (`PyPDFLoader` and `TextLoader`), split into chunks using `RecursiveCharacterTextSplitter`, and converted to vector embeddings locally with Ollama (`nomic-embed-text:v1.5`). The vectors are stored in Qdrant, and document metadata is saved in MongoDB.
+- **Retrieval and QA**: When a user submits a question, the query is embedded with Ollama, relevant text chunks are retrieved from Qdrant via cosine similarity search, and an LLM (accessed through OpenRouter via the OpenAI client) generates an answer grounded in that context.
+- **Frontend and management**: A lightweight HTML, CSS, and JavaScript interface served by FastAPI provides a question-and-answer view, a file upload and deletion manager, and an admin dashboard to view vector records or reset stored data.
 
-3. [MongoDB](https://www.mongodb.com/docs/manual/installation/) — running on `localhost:27017`
+## Run It
 
-4. An [OpenRouter](https://openrouter.ai/) account with an API key
+### Prerequisites
 
-## Setup
+Ensure the following local services are running:
+
+- **Ollama** with the embedding model:
+  ```bash
+  ollama pull nomic-embed-text:v1.5
+  ```
+- **Qdrant** on port 6333:
+  ```bash
+  docker run -p 6333:6333 qdrant/qdrant
+  ```
+- **MongoDB** running on `localhost:27017`
+- An **OpenRouter** API key
+
+### Setup
 
 1. Clone the repository:
+
 ```bash
-   git clone <your-repo-url>
-   cd <repo-folder>
+git clone https://github.com/arsalan-99/RAG_project.git
+cd RAG_project
 ```
 
 2. Create a virtual environment and install dependencies:
+
 ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-3. Set up environment variables:
-```bash
-   cp .env.example .env
-```
-   Open `.env` and fill in your `LLM_API_KEY`.
+3. Configure environment variables:
 
-4. Run the backend:
 ```bash
-   cd backend
-   uvicorn server:app --reload
+cp .env.example .env
 ```
 
-5. Open your browser at [http://localhost:8000](http://localhost:8000)
+Open `.env` and set your `LLM_API_KEY`.
 
-## Project Structure
-rag_app/  
-├── backend/  
-│   ├── config.py       # Loads config from .env  
-│   ├── ingest.py       # Chunking, embedding, storing in Qdrant  
-│   ├── rag.py          # Query + LLM call  
-│   └── server.py       # FastAPI routes  
-├── frontend/  
-│   ├── index.html      # Q&A page  
-│   ├── files.html      # Upload & manage files  
-│   ├── admin.html      # Vector DB dashboard  
-│   ├── script.js  
-│   ├── files.js  
-│   ├── admin.js  
-│   └── style.css  
-├── data/               # Default demo files (auto-ingested on startup)  
-├── .env.example        # Copy this to .env and fill in your key  
-├── requirements.txt  
-└── README.md  
+4. Start the server:
+
+```bash
+cd backend
+uvicorn server:app --reload
+```
+
+5. Open `http://localhost:8000` in your browser.
