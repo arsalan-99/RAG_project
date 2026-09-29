@@ -2,10 +2,6 @@
 
 A Retrieval Augmented Generation (RAG) service that allows users to upload documents, indexes them into a vector database. User can ask questions about uploaded them, system retrieves relevant chunks from the vector database and uses an LLM to answer.
 
-## Screenshot
-
-<!-- Add screenshot here -->
-
 ## Tech Stack
 
 - Python
