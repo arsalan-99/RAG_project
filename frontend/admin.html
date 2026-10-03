@@ -2,26 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin — Vector DB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — RAG Demo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
+        <span class="nav-brand">RAG Demo</span>
+        <a href="index.html">Chat</a>
         <a href="files.html">Files</a>
-        <a href="admin.html">Admin</a>
+        <a href="admin.html" class="active">Admin</a>
     </nav>
-    <div class="container">
-        <h1>Vector DB Dashboard</h1>
 
-        <div class="admin-header">
-            <p id="totalCount">Loading...</p>
-            <button class="danger" onclick="resetDB()">Delete All Data</button>
-            <button onclick="loadRecords()">Refresh</button>
+    <div class="page">
+        <div class="container">
+            <div>
+                <h1 class="page-title">Vector DB Dashboard</h1>
+                <p class="page-sub">Inspect and manage raw vector records stored in Qdrant.</p>
+            </div>
+
+            <div class="card">
+                <div class="admin-toolbar">
+                    <span class="stat-badge" id="totalCount">Loading...</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="secondary small" onclick="loadRecords()">Refresh</button>
+                        <button class="danger small" onclick="resetDB()">Delete All Data</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">Records</div>
+                <div id="records"><p class="empty-state">Loading records...</p></div>
+            </div>
         </div>
-
-        <div id="records"></div>
     </div>
+
     <script src="admin.js"></script>
 </body>
 </html>

@@ -21,3 +21,6 @@ Thumbs.db
 # Virtual environments
 .venv/
 venv/
+
+# Sample / test data
+data/

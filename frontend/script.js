@@ -5,13 +5,15 @@ async function uploadFile() {
     const status = document.getElementById("uploadStatus");
 
     if (!fileInput.files[0]) {
-        status.innerText = "Please select a file first.";
+        status.textContent = "Please select a file first.";
+        status.className = "status error";
         return;
     }
 
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
-    status.innerText = "Uploading and processing...";
+    status.textContent = "Uploading and processing...";
+    status.className = "status";
 
     try {
         const response = await fetch(`${API}/upload`, {
@@ -20,9 +22,11 @@ async function uploadFile() {
         });
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         const data = await response.json();
-        status.innerText = data.message;
+        status.textContent = data.message;
+        status.className = "status success";
     } catch (err) {
-        status.innerText = `Upload failed: ${err.message}`;
+        status.textContent = `Upload failed: ${err.message}`;
+        status.className = "status error";
     }
 }
 
@@ -31,11 +35,14 @@ async function askQuestion() {
     const answerDiv = document.getElementById("answer");
 
     if (!question) {
-        answerDiv.innerText = "Please type a question first.";
+        answerDiv.textContent = "Please type a question first.";
+        answerDiv.className = "thinking";
+        answerDiv.classList.add("visible");
         return;
     }
 
-    answerDiv.innerText = "Thinking...";
+    answerDiv.innerHTML = '<span class="thinking">Thinking...</span>';
+    answerDiv.className = "visible";
 
     try {
         const response = await fetch(`${API}/ask`, {
@@ -45,8 +52,8 @@ async function askQuestion() {
         });
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         const data = await response.json();
-        answerDiv.innerText = data.answer;
+        answerDiv.textContent = data.answer;
     } catch (err) {
-        answerDiv.innerText = `Error: ${err.message}`;
+        answerDiv.textContent = `Error: ${err.message}`;
     }
 }

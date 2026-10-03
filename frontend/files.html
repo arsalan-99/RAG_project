@@ -2,26 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Files</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files — RAG Demo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="files.html">Files</a>
+        <span class="nav-brand">RAG Demo</span>
+        <a href="index.html">Chat</a>
+        <a href="files.html" class="active">Files</a>
         <a href="admin.html">Admin</a>
     </nav>
 
-    <div class="container">
-        <h1>Uploaded Files</h1>
+    <div class="page">
+        <div class="container">
+            <div>
+                <h1 class="page-title">Uploaded Files</h1>
+                <p class="page-sub">Manage documents indexed into the vector database.</p>
+            </div>
 
-        <div class="upload-box">
-            <input type="file" id="fileInput" accept=".pdf,.txt" />
-            <button onclick="uploadFile()">Upload</button>
-            <p id="uploadStatus"></p>
+            <div class="card">
+                <div class="card-label">Upload New File</div>
+                <input type="file" id="fileInput" accept=".pdf,.txt" />
+                <button onclick="uploadFile()" style="margin-top: 12px;">Upload</button>
+                <p class="status" id="uploadStatus"></p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">Indexed Files</div>
+                <div id="fileList"><p class="empty-state">Loading files...</p></div>
+            </div>
         </div>
-
-        <div id="fileList"></div>
     </div>
 
     <script src="files.js"></script>

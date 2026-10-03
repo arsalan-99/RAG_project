@@ -1,6 +1,18 @@
 # RAG Web App
 
-A Retrieval Augmented Generation (RAG) service that allows users to upload documents, indexes them into a vector database. User can ask questions about uploaded them, system retrieves relevant chunks from the vector database and uses an LLM to answer.
+This is a simple Retrieval Augmented Generation (RAG) service demo that allows users to upload documents, chunk and convert them into vector embeddings, and perform semantic retrieval to answer queries using an LLM. Built as a standalone reference to showcase the core retrieval architecture of a larger document pipeline in a clean, public setup.
+
+## Uploading Document
+
+<div align="center">
+  <img src="demo_files/doc-preview.png" alt="Web App Doc Upload Preview" width="900">
+</div>
+
+## Chat Preview
+
+<div align="center">
+  <img src="demo_files/chat-preview.png" alt="Web App Chat Preview" width="900">
+</div>
 
 ## Tech Stack
 
@@ -20,7 +32,7 @@ A Retrieval Augmented Generation (RAG) service that allows users to upload docum
 - **Retrieval and QA**: When a user submits a question, the query is embedded with Ollama, relevant text chunks are retrieved from Qdrant via cosine similarity search, and an LLM (accessed through OpenRouter via the OpenAI client) generates an answer grounded in that context.
 - **Frontend and management**: A lightweight HTML, CSS, and JavaScript interface served by FastAPI provides a question-and-answer view, a file upload and deletion manager, and an admin dashboard to view vector records or reset stored data.
 
-## Run It
+## Steps for setup
 
 ### Prerequisites
 
